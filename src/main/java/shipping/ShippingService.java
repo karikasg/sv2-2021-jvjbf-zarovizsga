@@ -28,24 +28,21 @@ public class ShippingService {
         Map<String, Integer> transport = new HashMap<>();
 
         for (Transportable pack : packages) {
+            String destinationCountry = pack.getDestinationCountry();
             int value = 1;
-            if (transport.containsKey(pack.getDestinationCountry())) {
-                value = transport.get(pack.getDestinationCountry())+1;
+            if (transport.containsKey(destinationCountry)) {
+                value = transport.get(destinationCountry)+1;
             }
-            transport.put(pack.getDestinationCountry(), value);
+            transport.put(destinationCountry, value);
         }
         return transport;
     }
 
     public List<Transportable> sortInternationalPackagesByDistance() {
-        List<Transportable> result = new ArrayList<>();
-
-        for (Transportable pack : packages) {
-            if (pack.getClass() == InternationalPackage.class) {
-                result.add(pack);
-            }
-        }
-//        result.stream().sorted(Comparator.comparing((InternationalPackage o) -> o.getDistance())).toList();
-        return result;
+        return packages.
+                stream().
+                filter(o -> o.getClass() == InternationalPackage.class).
+                sorted(Comparator.comparing(o -> ((InternationalPackage) o).getDistance())).
+                toList();
     }
 }

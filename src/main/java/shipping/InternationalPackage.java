@@ -38,4 +38,8 @@ public class InternationalPackage implements Transportable {
     public int getDistance() {
         return distance;
     }
+
+    public int compareTo(InternationalPackage o) {
+        return distance - o.getDistance() ;
+    }
 }
