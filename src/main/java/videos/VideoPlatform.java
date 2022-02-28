@@ -17,14 +17,9 @@ public class VideoPlatform {
     public void readDataFromFile(Path path) {
 
         try (BufferedReader br = Files.newBufferedReader(path)) {
-            String[] elements;
             String line = br.readLine();
             while ((line = br.readLine()) != null) {
-                elements = line.split(";");
-                String name = elements[0];
-                int subs = Integer.parseInt(elements[1]);
-                int nrv = Integer.parseInt(elements[2]);
-                channels.add(new Channel(name, subs, nrv));
+                addChannel(line);
             }
         }
         catch (IOException ioe) {
@@ -38,5 +33,10 @@ public class VideoPlatform {
             sum += chn.getNumber_of_videos();
         }
         return sum;
+    }
+
+    private void addChannel(String line) {
+        String[] elements = line.split(";");
+        channels.add(new Channel(elements[0], Integer.parseInt(elements[1]), Integer.parseInt(elements[2])));
     }
 }
