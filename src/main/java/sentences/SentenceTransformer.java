@@ -14,8 +14,8 @@ public class SentenceTransformer {
     }
 
     private boolean isValid (String sentence) {
-        Character chrFirst = sentence.charAt(0);
-        Character chrLast = sentence.charAt(sentence.length()-1);
+        char chrFirst = sentence.charAt(0);
+        char chrLast = sentence.charAt(sentence.length()-1);
 
         if (chrFirst < 'A' || chrFirst > 'Z') throw new IllegalArgumentException("Must start with capital letter!");
         if (chrLast != '.' && chrLast != '!' && chrLast != '?') throw new IllegalArgumentException("Must end with . ! or ?");
